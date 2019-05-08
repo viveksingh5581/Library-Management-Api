@@ -6,7 +6,7 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
 @Data
 @JsonInclude(Include.NON_NULL)
-public class UserInfo {
+public class UserInfoDomain {
 
 	private int userId;
     private String userName;

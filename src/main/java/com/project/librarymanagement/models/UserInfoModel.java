@@ -45,12 +45,6 @@ public class UserInfoModel {
     
     @Column(name = "ROLE_NAME")
     private String roleName;
-    
-    @Override
-    public String toString() {
-        return "User{" +
-                "userName=" + userFirstName + " " + userLastName;
-                     }
 }
 
 
