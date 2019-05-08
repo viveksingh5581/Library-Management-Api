@@ -1,4 +1,4 @@
-package com.project.liabraymanagement;
+package com.project.librarymanagement;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
