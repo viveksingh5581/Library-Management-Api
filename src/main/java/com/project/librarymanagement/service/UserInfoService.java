@@ -21,5 +21,11 @@ public class UserInfoService {
 		UserInfoModel userInfo = userInfoRepository.findByUserId(userId);
 		return userInfoTransformer.toUserInfo(userInfo);
 	}
+	
+	public UserInfoDomain registerUserInfo(final UserInfoDomain userInfoDomain) {
+		UserInfoModel userInfo = userInfoTransformer.toUserInfo(userInfoDomain);
+		userInfo = userInfoRepository.save(userInfo);
+		return userInfoTransformer.toUserInfo(userInfo);
+	}
 
 }

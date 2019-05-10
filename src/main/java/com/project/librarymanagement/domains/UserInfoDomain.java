@@ -10,9 +10,10 @@ public class UserInfoDomain {
 
 	private int userId;
     private String userName;
+    private String userFirstName;
+    private String userLastName;
     private String emailAddress;
     private boolean isValid;
-    private Date createdAt;
-    private Date updatedAt;
     private String roleName;
+    private String originalPassword;
 }

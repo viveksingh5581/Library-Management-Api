@@ -5,11 +5,10 @@ import javax.persistence.*;
 import java.util.Date;
 @Data
 @Entity
-@Table(name = "VW_USERINFO_STATUS")
-public class UserInfoModel {
+@Table(name = "APP_USER")
+public class AppUserModel {
 
 	@Id
-//	@GeneratedValue
     @Column(name = "USER_ID")
     private int userId;
     
@@ -34,12 +33,6 @@ public class UserInfoModel {
     
     @Column(name = "IS_VALID")
     private boolean isValid;
-    
-    @Column(name = "ROLE_ID")
-    private String roleId;
-    
-    @Column(name = "ROLE_NAME")
-    private String roleName;
-}
 
+}
 

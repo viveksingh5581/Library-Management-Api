@@ -3,6 +3,8 @@ package com.project.librarymanagement.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -19,5 +21,9 @@ public class UserInfoController {
 	public UserInfoDomain getUser(@PathVariable (name = "userId") Integer userId) {
 		return userInfoService.getUserInfo(userId);
 	}
-
+	
+//	@PostMapping("/createUser")
+//	public UserInfoDomain registerUser(@RequestBody UserInfoDomain userInfoDomain) {
+//		return userInfoService.registerUserInfo(userInfoDomain);
+	//}
 }

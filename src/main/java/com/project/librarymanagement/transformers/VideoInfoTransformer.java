@@ -18,7 +18,7 @@ public class VideoInfoTransformer {
 		videoInfo.setReleaseYear(videoInfoModel.getReleaseYear());
 		videoInfo.setVideoPrice(videoInfoModel.getVideoPrice());
 		videoInfo.setVideoRating(videoInfoModel.getVideoRating());
-		
+
 	return videoInfo;
 	}
 }
