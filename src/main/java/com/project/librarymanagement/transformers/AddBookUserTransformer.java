@@ -25,8 +25,8 @@ public class AddBookUserTransformer {
 		addBookInfo.setPublicationYear(addBookInfoModel.getPublicationYear());
 		return addBookInfo;
 	}
-	
-	
+
+
 	public AddBookInfoModel toBookInfo(final AddBookInfoDomain addBookInfoDomain) {
 		AddBookInfoModel addBookInfoModel = new AddBookInfoModel();
 		addBookInfoModel.setUserId(addBookInfoDomain.getUserId());

@@ -12,9 +12,10 @@ public interface AddBookUserRepository extends  JpaRepository <AddBookInfoModel,
 
 	AddBookInfoModel findByUserId(Integer userId);
 	
-	AddBookInfoModel bookDetailsTitle(String bookDetailsTitle);
+	AddBookInfoModel findBybookDetailsTitle(String bookDetailsTitle);
 	
 	AddBookInfoModel findByAuthorName(String authorId);
 	
 	AddBookInfoModel findByPublicationName(String publicationName);
+	
 }

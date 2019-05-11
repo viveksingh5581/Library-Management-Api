@@ -39,7 +39,7 @@ public class AddBookUserService {
 	}
 	
 	private void validateUserName(final String bookDetailsTitle) {
-		AddBookInfoModel existingUser = addBookUserRepository.bookDetailsTitle(bookDetailsTitle);
+		AddBookInfoModel existingUser = addBookUserRepository.findBybookDetailsTitle(bookDetailsTitle);
 		if (existingUser != null) {
 			throw new InvalidDataException("User already exists for userName :" + bookDetailsTitle);
 		}
