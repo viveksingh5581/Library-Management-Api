@@ -22,8 +22,4 @@ public class UserInfoController {
 		return userInfoService.getUserInfo(userId);
 	}
 	
-//	@PostMapping("/createUser")
-//	public UserInfoDomain registerUser(@RequestBody UserInfoDomain userInfoDomain) {
-//		return userInfoService.registerUserInfo(userInfoDomain);
-	//}
 }
