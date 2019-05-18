@@ -4,14 +4,14 @@ import java.util.Date;
 
 import org.springframework.stereotype.Component;
 
-import com.project.librarymanagement.domains.UserInfoDomain;
-import com.project.librarymanagement.models.UserInfoModel;
+import com.project.librarymanagement.domains.AppUserDomain;
+import com.project.librarymanagement.models.AppUserModel;
 
 @Component 
-public class UserInfoTransformer {
+public class AppUserTransformer {
 	
-	public UserInfoDomain toUserInfo(final UserInfoModel userInfoModel) {
-		UserInfoDomain userInfo = new UserInfoDomain();
+	public AppUserDomain toUserInfo(final AppUserModel userInfoModel) {
+		AppUserDomain userInfo = new AppUserDomain();
 		userInfo.setEmailAddress(userInfoModel.getEmailAddress());
 		userInfo.setUserId(userInfoModel.getUserId());
 		userInfo.setUserName(userInfoModel.getUserName());
@@ -19,8 +19,8 @@ public class UserInfoTransformer {
 		return userInfo;
 	}
 	
-	public UserInfoModel toUserInfo(final UserInfoDomain userInfoDomain) {
-		UserInfoModel userInfoModel = new UserInfoModel();
+	public AppUserModel toUserInfo(final AppUserDomain userInfoDomain) {
+		AppUserModel userInfoModel = new AppUserModel();
 	    userInfoModel.setOriginalPassword(userInfoDomain.getOriginalPassword());
 	    userInfoModel.setEmailAddress(userInfoDomain.getEmailAddress());
 	    userInfoModel.setUserFirstName(userInfoDomain.getUserFirstName());
@@ -28,6 +28,6 @@ public class UserInfoTransformer {
 	    userInfoModel.setUserName(userInfoDomain.getUserName());
 	    userInfoModel.setOriginalPassword(userInfoDomain.getOriginalPassword());
 	    userInfoModel.setCreatedAt(new Date());
-		return userInfoModel;
+		return userInfoModel; 
 	}
 }

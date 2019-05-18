@@ -1,4 +1,5 @@
 package com.project.librarymanagement.domains;
+
 import lombok.Data;
 import java.util.Date;
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -6,14 +7,22 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
 @Data
 @JsonInclude(Include.NON_NULL)
-public class UserInfoDomain {
+public class AddVideoInfoDomain {
 
 	private int userId;
-    private String userName;
-    private String userFirstName;
-    private String userLastName;
-    private String emailAddress;
-    private boolean isValid;
-    private String roleName;
-    private String originalPassword;
+
+	private int videoId;
+
+	private String videoTitle;
+
+	private String directorName;
+
+	private float videoRating;
+
+	private float videoPrice;
+
+	private Date releaseYear;
+
+	private int categoryId;
 }
+
