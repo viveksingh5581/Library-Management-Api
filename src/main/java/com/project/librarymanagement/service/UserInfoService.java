@@ -3,8 +3,9 @@ package com.project.librarymanagement.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.project.librarymanagement.domains.UserInfoDomain;
-import com.project.librarymanagement.models.UserInfoModel;
+import com.project.librarymanagement.domains.UserDetail;
+import com.project.librarymanagement.exceptions.InvalidDataException;
+import com.project.librarymanagement.models.UserModel;
 import com.project.librarymanagement.repositories.UserInfoRepository;
 import com.project.librarymanagement.transformers.UserInfoTransformer;
 
@@ -17,15 +18,15 @@ public class UserInfoService {
 	@Autowired
 	private UserInfoTransformer userInfoTransformer;
 
-	public UserInfoDomain getUserInfo(final Integer userId) {
-		UserInfoModel userInfo = userInfoRepository.findByUserId(userId);
-		return userInfoTransformer.toUserInfo(userInfo);
-	}
-	
-	public UserInfoDomain registerUserInfo(final UserInfoDomain userInfoDomain) {
-		UserInfoModel userInfo = userInfoTransformer.toUserInfo(userInfoDomain);
-		userInfo = userInfoRepository.save(userInfo);
-		return userInfoTransformer.toUserInfo(userInfo);
+	public UserDetail getUserInfo(final String email, final String password) {
+
+		UserModel userInfo = userInfoRepository.findByEmailAddress(email);
+		if (userInfo.getOriginalPassword().equals(password)) {
+			return userInfoTransformer.toUserInfo(userInfo);
+		} else {
+			throw new InvalidDataException(
+					"Email id Not registered:" + userInfo.getUserFirstName() + userInfo.getUserLastName());
+		}
 	}
 
 }

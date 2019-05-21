@@ -18,25 +18,14 @@ public class AppUserService {
 	@Autowired
 	private AppUserTransformer appUserTransformer;
 
-	private AppUserModel getUserInfo(final Integer userId) {
-		return appUserRepository.findByUserId(userId);
-	}
-
 	public AppUserDomain registerUserInfo(final AppUserDomain appInfoDomain) {
-		validateUserId(appInfoDomain.getUserId());
 		validateUserName(appInfoDomain.getUserName());
 		validateUserEmail(appInfoDomain.getEmailAddress());
 	
 		AppUserModel savedUser = appUserRepository.save(appUserTransformer.toUserInfo(appInfoDomain));
 		return appUserTransformer.toUserInfo(savedUser);
 	}
-	
-	private void validateUserId(final int userId) {
-		AppUserModel existingUser = getUserInfo(userId);
-		if (existingUser != null) {
-			throw new InvalidDataException("User already exists for id :" + existingUser.getUserId());
-		}
-	}
+
 	
 	private void validateUserName(final String userName) {
 		AppUserModel existingUser = appUserRepository.findByUserName(userName);

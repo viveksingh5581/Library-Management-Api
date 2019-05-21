@@ -13,7 +13,6 @@ public class AppUserTransformer {
 	public AppUserDomain toUserInfo(final AppUserModel userInfoModel) {
 		AppUserDomain userInfo = new AppUserDomain();
 		userInfo.setEmailAddress(userInfoModel.getEmailAddress());
-		userInfo.setUserId(userInfoModel.getUserId());
 		userInfo.setUserName(userInfoModel.getUserName());
 		userInfo.setValid(userInfoModel.isValid());
 		return userInfo;

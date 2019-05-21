@@ -1,33 +1,21 @@
 package com.project.librarymanagement.transformers;
 
-import java.util.Date;
-
 import org.springframework.stereotype.Component;
 
-import com.project.librarymanagement.domains.UserInfoDomain;
-import com.project.librarymanagement.models.UserInfoModel;
+import com.project.librarymanagement.domains.UserDetail;
+import com.project.librarymanagement.models.UserModel;
 
 @Component 
 public class UserInfoTransformer {
 	
-	public UserInfoDomain toUserInfo(final UserInfoModel userInfoModel) {
-		UserInfoDomain userInfo = new UserInfoDomain();
+	public UserDetail toUserInfo(final UserModel userInfoModel) {
+		UserDetail userInfo = new UserDetail();
 		userInfo.setEmailAddress(userInfoModel.getEmailAddress());
 		userInfo.setUserId(userInfoModel.getUserId());
-		userInfo.setUserName(userInfoModel.getUserName());
 		userInfo.setValid(userInfoModel.isValid());
+		userInfo.setUserFirstName(userInfoModel.getUserFirstName());
+		userInfo.setUserLastName(userInfoModel.getUserLastName());
+		
 		return userInfo;
-	}
-	
-	public UserInfoModel toUserInfo(final UserInfoDomain userInfoDomain) {
-		UserInfoModel userInfoModel = new UserInfoModel();
-	    userInfoModel.setOriginalPassword(userInfoDomain.getOriginalPassword());
-	    userInfoModel.setEmailAddress(userInfoDomain.getEmailAddress());
-	    userInfoModel.setUserFirstName(userInfoDomain.getUserFirstName());
-	    userInfoModel.setUserLastName(userInfoDomain.getUserLastName());
-	    userInfoModel.setUserName(userInfoDomain.getUserName());
-	    userInfoModel.setOriginalPassword(userInfoDomain.getOriginalPassword());
-	    userInfoModel.setCreatedAt(new Date());
-		return userInfoModel;
 	}
 }

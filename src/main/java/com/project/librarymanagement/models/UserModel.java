@@ -6,10 +6,9 @@ import java.util.Date;
 @Data
 @Entity
 @Table(name = "VW_USERINFO_STATUS")
-public class UserInfoModel {
+public class UserModel {
 
 	@Id
-//	@GeneratedValue
     @Column(name = "USER_ID")
     private int userId;
     
