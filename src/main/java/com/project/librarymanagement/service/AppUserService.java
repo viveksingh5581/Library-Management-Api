@@ -21,7 +21,7 @@ public class AppUserService {
 	public AppUserDomain registerUserInfo(final AppUserDomain appInfoDomain) {
 		validateUserName(appInfoDomain.getUserName());
 		validateUserEmail(appInfoDomain.getEmailAddress());
-	
+		appInfoDomain.setValid(true);
 		AppUserModel savedUser = appUserRepository.save(appUserTransformer.toUserInfo(appInfoDomain));
 		return appUserTransformer.toUserInfo(savedUser);
 	}

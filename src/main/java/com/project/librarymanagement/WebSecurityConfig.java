@@ -1,4 +1,4 @@
-package com.project.librarymanagemet.configuration;
+package com.project.librarymanagement;
 
 import java.util.List;
 
@@ -15,6 +15,7 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
+	
 	@Value("#{'${allowed.origins}'.split(',')}")
 	private List<String> allowedOrigins;
 	@Value("#{'${allowed.methods}'.split(',')}")
@@ -25,6 +26,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http.cors().and().csrf().disable();
+//		http.cors().and().authorizeRequests().anyRequest().permitAll();
 	}
 
 	@Bean
