@@ -7,5 +7,6 @@ public class UserDetail {
     private String userFirstName;
     private String userLastName;
     private String emailAddress;
+    private String password;
     private boolean isValid;
 }
