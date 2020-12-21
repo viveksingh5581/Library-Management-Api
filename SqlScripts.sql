@@ -1,0 +1,265 @@
+
+--LIBRARY MANAGEMENT SYSTEM DATABASE TABLES AND VIEWS SCRIPT
+--To Create DB
+CREATE DATABASE LibraryManagement
+--TABLE SCRIPTS
+USE LibraryManagement
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[APP_ROLE](
+    [ROLE_ID] [bigint] NOT NULL,
+    [ROLE_NAME] [varchar](30) NOT NULL
+) ON [PRIMARY]
+GO
+ALTER TABLE [dbo].[APP_ROLE] ADD  CONSTRAINT [APP_ROLE_PK] PRIMARY KEY CLUSTERED 
+(
+    [ROLE_ID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+GO
+SET ANSI_PADDING ON
+GO
+ALTER TABLE [dbo].[APP_ROLE] ADD  CONSTRAINT [APP_ROLE_UK] UNIQUE NONCLUSTERED 
+(
+    [ROLE_NAME] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+GO
+------------------------------------------------------------------------------------------------------------------------------------------------------
+USE LibraryManagement
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[APP_USER](
+    [USER_ID] [bigint] NOT NULL,
+    [USER_NAME] [varchar](200) NOT NULL,
+    [USER_FIRST_NAME] [varchar](200) NOT NULL,
+    [USER_LAST_NAME] [varchar](200) NOT NULL,
+    [EMAIL_ADDRESS] [varchar](200) NOT NULL,
+    [CREATED_AT] [smalldatetime] NULL,
+    [ORIGINAL_PASSWORD] [varchar](200) NOT NULL,
+    [IS_VALID] [bit] NOT NULL
+) ON [PRIMARY]
+
+GO
+ALTER TABLE [dbo].[APP_USER] ADD  CONSTRAINT [APP_USER_PK] PRIMARY KEY CLUSTERED 
+(
+    [USER_ID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+GO
+SET ANSI_PADDING ON
+
+GO
+ALTER TABLE [dbo].[APP_USER] ADD  CONSTRAINT [APP_USER_UK] UNIQUE NONCLUSTERED 
+(
+    [USER_NAME] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+GO
+------------------------------------------------------------------------------------------------------------------------------------------------------
+USE LibraryManagement
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[BOOK_DETAILS](
+    [USER_ID] [bigint] NOT NULL,
+    [BOOK_DETAILS_ISBN_CODE] [varchar](100) NOT NULL,
+    [BOOK_DETAILS_TITLE] [varchar](200) NOT NULL,
+    [BOOK_DETAILS_LANGUAGE] [varchar](200) NOT NULL,
+    [BINDING_ID] [bigint] NOT NULL,
+    [NO_COPIES_ACTUAL] [int] NOT NULL,
+    [CATEGORY_ID] [int] NOT NULL,
+    [PUBLICATION_YEAR] [smalldatetime] NOT NULL,
+    [AUTHOR_NAME] [varchar](200) NOT NULL,
+    [PUBLICATION_NAME] [varchar](200) NOT NULL,
+    [BOOK_PRICE_IN_INR] [decimal](18, 2) NOT NULL
+) ON [PRIMARY]
+GO
+ALTER TABLE [dbo].[BOOK_DETAILS] ADD PRIMARY KEY CLUSTERED 
+(
+    [USER_ID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+GO
+------------------------------------------------------------------------------------------------------------------------------------------------------
+USE LibraryManagement
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[VIDEO_DETAILS](
+    [USER_ID] [bigint] NOT NULL,
+    [VIDEO_ID] [int] NOT NULL,
+    [VIDEO_TITLE] [varchar](200) NULL,
+    [DIRECTOR_NAME] [varchar](200) NULL,
+    [VIDEO_RATING] [decimal](18, 2) NULL,
+    [VIDEO_PRICE] [decimal](18, 2) NULL,
+    [RELEASE_YEAR] [smalldatetime] NOT NULL,
+    [CATEGORY_ID] [int] NOT NULL
+) ON [PRIMARY]
+
+GO
+ALTER TABLE [dbo].[VIDEO_DETAILS] ADD PRIMARY KEY CLUSTERED 
+(
+    [VIDEO_ID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+GO
+------------------------------------------------------------------------------------------------------------------------------------------------------
+USE LibraryManagement
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[CATEGORY_DETAILS](
+    [CATEGORY_ID] [int] NOT NULL,
+    [CATEGORY_DESCRIPTION] [varchar](200) NOT NULL
+) ON [PRIMARY]
+
+GO
+ALTER TABLE [dbo].[CATEGORY_DETAILS] ADD PRIMARY KEY CLUSTERED 
+(
+    [CATEGORY_ID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+GO
+
+------------------------------------------------------------------------------------------------------------------------------------------------------
+USE LibraryManagement
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[USER_ROLE](
+	[ID] [bigint] NOT NULL,
+	[USER_ID] [bigint] NOT NULL,
+	[ROLE_ID] [bigint] NOT NULL
+) ON [PRIMARY]
+
+GO
+ALTER TABLE [dbo].[USER_ROLE] ADD  CONSTRAINT [USER_ROLE_PK] PRIMARY KEY CLUSTERED 
+(
+	[ID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+GO
+ALTER TABLE [dbo].[USER_ROLE] ADD  CONSTRAINT [USER_ROLE_UK] UNIQUE NONCLUSTERED 
+(
+	[USER_ID] ASC,
+	[ROLE_ID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+GO
+ALTER TABLE [dbo].[USER_ROLE]  WITH CHECK ADD  CONSTRAINT [USER_ROLE_FK1] FOREIGN KEY([USER_ID])
+REFERENCES [dbo].[APP_USER] ([USER_ID])
+GO
+ALTER TABLE [dbo].[USER_ROLE] CHECK CONSTRAINT [USER_ROLE_FK1]
+GO
+--TABLE SCRIPTS
+
+------------------------------------------------------------------------------------------------------------------------------------------------------
+--VIEWS SCRIPT
+------------------------------------------------------------------------------------------------------------------------------------------------------
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE      VIEW [dbo].[VW_BOOKDETAILS_STATUS]
+AS 
+SELECT BD.USER_ID,BD.BOOK_DETAILS_ISBN_CODE,BD.BOOK_DETAILS_TITLE,BD.BOOK_DETAILS_LANGUAGE, 
+BD.BINDING_ID,BD.NO_COPIES_ACTUAL,BD.CATEGORY_ID,CD.CATEGORY_DESCRIPTION,BD.PUBLICATION_YEAR,BD.AUTHOR_NAME,BD.PUBLICATION_NAME,BD.BOOK_PRICE_IN_INR 
+FROM BOOK_DETAILS BD 
+INNER JOIN CATEGORY_DETAILS CD 
+ON BD.CATEGORY_ID=CD.CATEGORY_ID
+GO
+------------------------------------------------------------------------------------------------------------------------------------------------------
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE      VIEW [dbo].[VW_USERINFO_STATUS]
+AS 
+select AU.USER_ID,AU.USER_NAME,AU.USER_FIRST_NAME,AU.USER_LAST_NAME,AU.EMAIL_ADDRESS,AU.CREATED_AT,AU.ORIGINAL_PASSWORD,AU.IS_VALID,UR.ROLE_ID,AR.ROLE_NAME from APP_USER AU 
+INNER JOIN USER_ROLE UR
+ON AU.USER_ID= UR.USER_ID
+INNER JOIN APP_ROLE AR
+on AR.ROLE_ID=UR.ROLE_ID
+GO
+------------------------------------------------------------------------------------------------------------------------------------------------------
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE  VIEW [dbo].[VW_VIDEODETAILS_STATUS]
+AS 
+SELECT BD.USER_ID,BD.VIDEO_ID,BD.VIDEO_TITLE,BD.DIRECTOR_NAME,BD.VIDEO_RATING,BD.VIDEO_PRICE,BD.RELEASE_YEAR,CD.CATEGORY_DESCRIPTION
+FROM VIDEO_DETAILS BD 
+INNER JOIN CATEGORY_DETAILS CD 
+ON BD.CATEGORY_ID=CD.CATEGORY_ID
+GO
+------------------------------------------------------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------------------------------------------------------
+--INSERT SCRIPTS
+------------------------------------------------------------------------------------------------------------------------------------------------------
+
+insert into app_role (ROLE_ID, ROLE_NAME)
+values (1, 'ROLE_ADMIN');
+insert into app_role (ROLE_ID, ROLE_NAME)
+values (2, 'ROLE_USER');
+insert into user_role (ID, USER_ID, ROLE_ID)
+values (1, 1, 1);
+insert into user_role (ID, USER_ID, ROLE_ID)
+values (2, 2, 2);
+insert into user_role (ID, USER_ID, ROLE_ID)
+values (3, 3, 2);
+insert into user_role (ID, USER_ID, ROLE_ID)
+values (4, 4, 2);
+
+insert into App_User (USER_ID, USER_NAME, USER_FIRST_NAME,USER_LAST_NAME,EMAIL_ADDRESS,CREATED_AT,ORIGINAL_PASSWORD, IS_VALID)
+values (2, 'JamesBond','James','Bond','jamesbond@gmail.com',GETDATE(),'Jamesbond@12345',1);
+insert into App_User (USER_ID, USER_NAME, USER_FIRST_NAME,USER_LAST_NAME,EMAIL_ADDRESS,CREATED_AT,ORIGINAL_PASSWORD, IS_VALID)
+values (1, 'MartinRickey','Martin','Rickey','rickeymartin@gmail.com',GETDATE(),'rickeymartin@12345',1);
+insert into App_User (USER_ID, USER_NAME, USER_FIRST_NAME,USER_LAST_NAME,EMAIL_ADDRESS,CREATED_AT,ORIGINAL_PASSWORD, IS_VALID)
+values (3, 'VivekSingh','Vivek','Singh','viveksingh@gmail.com',GETDATE(),'viveksingh@12345',1);
+insert into App_User (USER_ID, USER_NAME, USER_FIRST_NAME,USER_LAST_NAME,EMAIL_ADDRESS,CREATED_AT,ORIGINAL_PASSWORD, IS_VALID)
+values (4, 'RitujKumar','Rituj','Kumar','ritujkumar@gmail.com',GETDATE(),'ritujkumar@12345',1);
+
+insert into CATEGORY_DETAILS (CATEGORY_ID,CATEGORY_DESCRIPTION) values('1','Novels')
+insert into CATEGORY_DETAILS (CATEGORY_ID,CATEGORY_DESCRIPTION) values('2','Engineering Books')
+insert into CATEGORY_DETAILS (CATEGORY_ID,CATEGORY_DESCRIPTION) values('3','Comics')
+insert into CATEGORY_DETAILS (CATEGORY_ID,CATEGORY_DESCRIPTION) values('4','Entrance Exam Books')
+insert into CATEGORY_DETAILS (CATEGORY_ID,CATEGORY_DESCRIPTION) values('5','Educational videos')
+insert into CATEGORY_DETAILS (CATEGORY_ID,CATEGORY_DESCRIPTION) values('6','News Videos')
+insert into CATEGORY_DETAILS (CATEGORY_ID,CATEGORY_DESCRIPTION) values('7','Poetry Videos')
+insert into CATEGORY_DETAILS (CATEGORY_ID,CATEGORY_DESCRIPTION) values('8','Inspiration Quotes Videos')
+insert into CATEGORY_DETAILS (CATEGORY_ID,CATEGORY_DESCRIPTION) values('9','Movie Videos')
+
+INSERT INTO BOOK_DETAILS(USER_ID,BOOK_DETAILS_ISBN_CODE, BOOK_DETAILS_TITLE, BOOK_DETAILS_LANGUAGE, BINDING_ID, NO_COPIES_ACTUAL,CATEGORY_ID,PUBLICATION_YEAR,AUTHOR_NAME,PUBLICATION_NAME,BOOK_PRICE_IN_INR) VALUES
+       ('1','978-0743289412', 'Liseys Story','English',14006867988,'24','1','2016-04-05','Stephen King','Charles Scribners Sons',250.00);
+INSERT INTO BOOK_DETAILS(USER_ID,BOOK_DETAILS_ISBN_CODE, BOOK_DETAILS_TITLE, BOOK_DETAILS_LANGUAGE, BINDING_ID, NO_COPIES_ACTUAL,CATEGORY_ID,PUBLICATION_YEAR,AUTHOR_NAME,PUBLICATION_NAME,BOOK_PRICE_IN_INR) VALUES
+       ('2','978-1596912366', 'Restless: A Novel','English',14006867988,'20','1','2018-04-05','William Boyd','Willys Scribners Sons',300.00);
+INSERT INTO BOOK_DETAILS(USER_ID,BOOK_DETAILS_ISBN_CODE, BOOK_DETAILS_TITLE, BOOK_DETAILS_LANGUAGE, BINDING_ID, NO_COPIES_ACTUAL,CATEGORY_ID,PUBLICATION_YEAR,AUTHOR_NAME,PUBLICATION_NAME,BOOK_PRICE_IN_INR) VALUES
+       ('3','978-1596912466', 'Half Girlfriend','English-Hindi',14006867908,'200','1','2017-04-05','Chetan Bhagat','Rupa & Co',190.00);
+INSERT INTO BOOK_DETAILS(USER_ID,BOOK_DETAILS_ISBN_CODE, BOOK_DETAILS_TITLE, BOOK_DETAILS_LANGUAGE, BINDING_ID, NO_COPIES_ACTUAL,CATEGORY_ID,PUBLICATION_YEAR,AUTHOR_NAME,PUBLICATION_NAME,BOOK_PRICE_IN_INR) VALUES
+       ('4','978-1596912466', 'Quantam CAT','English',11006867908,'200','4','2017-04-05','Sarvesh Kumar Verma','Mc graw Hills',1295.00);
+
+insert into VIDEO_DETAILS([USER_ID],[VIDEO_ID],[VIDEO_TITLE],[DIRECTOR_NAME],[VIDEO_RATING],[VIDEO_PRICE],[RELEASE_YEAR],[CATEGORY_ID])
+values('4','1','Terminator 2: Judgment Day','James Cameron',8.3,400.00,'1991-06-27','9')
+insert into VIDEO_DETAILS([USER_ID],[VIDEO_ID],[VIDEO_TITLE],[DIRECTOR_NAME],[VIDEO_RATING],[VIDEO_PRICE],[RELEASE_YEAR],[CATEGORY_ID])
+values('1','2','Raiders of the Lost Ark','Steven Spielberg',8.7,350.00,'1981-01-27','9')
+insert into VIDEO_DETAILS([USER_ID],[VIDEO_ID],[VIDEO_TITLE],[DIRECTOR_NAME],[VIDEO_RATING],[VIDEO_PRICE],[RELEASE_YEAR],[CATEGORY_ID])
+values('2','3','Aliens','James Cameron',8.6,400.00,'1986-04-20','9')
+insert into VIDEO_DETAILS([USER_ID],[VIDEO_ID],[VIDEO_TITLE],[DIRECTOR_NAME],[VIDEO_RATING],[VIDEO_PRICE],[RELEASE_YEAR],[CATEGORY_ID])
+values('3','4','Die Hard','John McTiernan',8.3,300.00,'1986-06-27','9')
+insert into VIDEO_DETAILS([USER_ID],[VIDEO_ID],[VIDEO_TITLE],[DIRECTOR_NAME],[VIDEO_RATING],[VIDEO_PRICE],[RELEASE_YEAR],[CATEGORY_ID])
+values('4','5','Madhushala','Harvansh Rai Bachchan',9.3,425.00,'1980-01-02','7')
+insert into VIDEO_DETAILS([USER_ID],[VIDEO_ID],[VIDEO_TITLE],[DIRECTOR_NAME],[VIDEO_RATING],[VIDEO_PRICE],[RELEASE_YEAR],[CATEGORY_ID])
+values('1','6','Pagli Ladki','Kumar Vishwas',8.3,400.00,'2005-06-27','7')
+insert into VIDEO_DETAILS([USER_ID],[VIDEO_ID],[VIDEO_TITLE],[DIRECTOR_NAME],[VIDEO_RATING],[VIDEO_PRICE],[RELEASE_YEAR],[CATEGORY_ID])
+values('2','7','Inspirational Quotes','Shiv Kheda',8.3,220.00,'2010-06-06','8')
+insert into VIDEO_DETAILS([USER_ID],[VIDEO_ID],[VIDEO_TITLE],[DIRECTOR_NAME],[VIDEO_RATING],[VIDEO_PRICE],[RELEASE_YEAR],[CATEGORY_ID])
+values('2','8','World cup Cricket videos','ESPN sports',8.3,500.00,'2015-09-27','6')
+insert into VIDEO_DETAILS([USER_ID],[VIDEO_ID],[VIDEO_TITLE],[DIRECTOR_NAME],[VIDEO_RATING],[VIDEO_PRICE],[RELEASE_YEAR],[CATEGORY_ID])
+values('3','9','Java complete package','Durga Tutorials',8.3,2800.00,'2015-09-26','5')
+
+
+
+
+       
+
